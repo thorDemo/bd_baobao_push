@@ -13,16 +13,17 @@ size = 0
 line_cache = 0
 while True:
     f_size = os.path.getsize(target)
-    if f_size != size:
-        print('什么？新的风暴已经出现！')
+    if f_size > size:
+        print('what? new storm is coming?！')
         lines = open(target, 'r', encoding='UTF-8')
         temp = 0
         arg = []
         pool = ThreadPool(thread_num)
         for line in lines:
-            if line_cache <= temp:
-                print(line)
-                arg.append(line)
+            print(line)
+            arg.append(line)
+            if line_cache == temp:
+                break
             temp += 1
         request = makeRequests(https_push, arg)
         [pool.putRequest(req) for req in request]
